@@ -5,9 +5,10 @@ set -ex
 IS_UBUNTU_1604=0
 grep -q '^VERSION=.16.04.[0-9]\+ LTS' /etc/os-release && IS_UBUNTU_1604=1
 
+chown root:root /
 
 DEBIAN_FRONTEND=noninteractive apt-get update
-DEBIAN_FRONTEND=noninteractive NM_INSTALL="apt-get -qq install -y" ./contrib/debian/REQUIRED_PACKAGES
+DEBIAN_FRONTEND=noninteractive NM_INSTALL="apt-get --yes install" bash -x ./contrib/debian/REQUIRED_PACKAGES
 
 dbus-uuidgen --ensure
 
